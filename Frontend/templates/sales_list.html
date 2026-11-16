@@ -1,29 +1,73 @@
-{% extends "base.html" %}
-{% block title %}Sales{% endblock %}
+﻿{% extends "base.html" %}
+
+{% block title %}Sales History{% endblock %}
+
 {% block content %}
+
 <div class="page-heading">
-    <div><h1>Sales</h1><p>View completed sales and invoices.</p></div>
-    <a class="button button-primary" href="{% url 'create_sale' %}">+ Create Sale</a>
+    <div>
+        <h1>Sales History</h1>
+        <p>Track transactions, review completed sales and manage invoices.</p>
+    </div>
+
+    <a class="button button-primary" href="{% url 'create_sale' %}">
+        + Create Sale
+    </a>
 </div>
+
 <section class="panel">
-<div class="table-wrap">
-<table>
-    <thead><tr><th>Invoice</th><th>Customer</th><th>Created By</th><th>Date</th><th>Total</th><th></th></tr></thead>
-    <tbody>
-    {% for sale in sales %}
-    <tr>
-        <td>#{{ sale.pk }}</td>
-        <td>{{ sale.customer|default:"Walk-in customer" }}</td>
-        <td>{{ sale.created_by|default:"—" }}</td>
-        <td>{{ sale.created_at|date:"d M Y, h:i A" }}</td>
-        <td>₹{{ sale.total_amount }}</td>
-        <td><a href="{% url 'invoice_detail' sale.pk %}">Invoice</a></td>
-    </tr>
-    {% empty %}
-    <tr><td colspan="6">No sales yet.</td></tr>
-    {% endfor %}
-    </tbody>
-</table>
-</div>
+
+    <div class="sales-table-header">
+        <div>
+            <h2>Recent Transactions</h2>
+            <p>All recorded sales transactions</p>
+        </div>
+
+        <span class="sales-count">
+            {{ sales|length }} Transactions
+        </span>
+    </div>
+
+    <div class="table-wrap">
+        <table class="sales-table">
+            <thead>
+                <tr>
+                    <th>Invoice ID</th>
+                    <th>Customer</th>
+                    <th>Sale Date</th>
+                    <th>Total Amount</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for sale in sales %}
+                <tr>
+                    <td><span class="invoice-number">#{{ sale.pk }}</span></td>
+                    <td><span class="customer-name">{{ sale.customer|default:"Walk-in Customer" }}</span></td>
+                    <td>{{ sale.sale_date|date:"d M Y, h:i A" }}</td>
+                    <td><span class="sale-amount">&#8377;{{ sale.total_amount|floatformat:2 }}</span></td>
+                    <td>
+                        <a class="invoice-link" href="{% url 'invoice_detail' sale.pk %}">
+                            View Invoice &rarr;
+                        </a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="empty-sales">
+                        <strong>No sales recorded yet</strong>
+                        <p>Your completed sales will appear here.</p>
+                        <a class="button button-primary" href="{% url 'create_sale' %}">
+                            Create First Sale
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
 </section>
+
 {% endblock %}

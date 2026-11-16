@@ -566,3 +566,84 @@ tbody tr:last-child td {
         padding: 15px;
     }
 }
+
+/* Sales History Enhancements */
+
+.sales-table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 22px;
+}
+
+.sales-table-header h2 {
+    margin-bottom: 3px;
+}
+
+.sales-table-header p {
+    font-size: 12px;
+}
+
+.sales-count {
+    background: #eff6ff;
+    color: #1d4ed8;
+    padding: 7px 13px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.sales-table .invoice-number {
+    color: #2563eb;
+    font-weight: 700;
+}
+
+.sales-table .customer-name {
+    color: #1e293b;
+    font-weight: 600;
+}
+
+.sales-table .sale-amount {
+    color: #15803d;
+    font-weight: 700;
+}
+
+.sales-table .invoice-link {
+    display: inline-block;
+    background: #eff6ff;
+    color: #1d4ed8;
+    padding: 7px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 650;
+    text-decoration: none;
+}
+
+.sales-table .invoice-link:hover {
+    background: #dbeafe;
+}
+
+.empty-sales {
+    text-align: center;
+    padding: 45px 15px;
+}
+
+.empty-sales strong {
+    display: block;
+    color: #334155;
+    font-size: 16px;
+    margin-bottom: 6px;
+}
+
+.empty-sales p {
+    margin-bottom: 18px;
+}
+
+@media (max-width: 650px) {
+    .sales-table-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
