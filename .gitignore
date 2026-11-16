@@ -1,18 +1,25 @@
-# Python virtual environment
 venv/
 Backend/venv/
-
-# Python cache
 __pycache__/
 *.py[cod]
+.env
+Backend/.env
+staticfiles/
+Backend/staticfiles/
+.vscode/
 
-# Environment variables
+# Environment variables and secrets
 .env
 Backend/.env
 
-# Django files
-*.log
-staticfiles/
+# Python cache files
+__pycache__/
+*.py[cod]
 
-# Editor files
-.vscode/
+# Virtual environment
+venv/
+Backend/venv/
+
+# Django generated static files
+staticfiles/
+Backend/staticfiles/
