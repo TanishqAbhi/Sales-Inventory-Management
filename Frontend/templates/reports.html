@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Reports{% endblock %}
+{% block content %}
+<div class="page-heading"><div><h1>Reports</h1><p>Sales performance summary.</p></div></div>
+<div class="stats-grid">
+    <div class="stat-card"><span>Total Revenue</span><strong>₹{{ total_revenue }}</strong></div>
+    <div class="stat-card"><span>Units Sold</span><strong>{{ total_units_sold }}</strong></div>
+</div>
+<section class="panel">
+    <h2>Best-selling Products</h2>
+    <div class="table-wrap">
+    <table>
+        <thead><tr><th>Product</th><th>Units Sold</th></tr></thead>
+        <tbody>
+        {% for item in best_sellers %}
+        <tr><td>{{ item.product__name }}</td><td>{{ item.units }}</td></tr>
+        {% empty %}
+        <tr><td colspan="2">No sales data available.</td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+</section>
+{% endblock %}

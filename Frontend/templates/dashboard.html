@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Dashboard</h1>
+<div class="cards">
+    <div class="card">
+        <h3>Total Products</h3>
+        <p>{{ product_count }}</p>
+    </div>
+    <div class="card">
+        <h3>Total Sales</h3>
+        <p>{{ sale_count }}</p>
+    </div>
+</div>
+
+<h2>Low Stock Products</h2>
+<ul>
+{% for product in low_stock %}
+    <li>{{ product.name }} - {{ product.stock_quantity }}</li>
+{% empty %}
+    <li>No low-stock products.</li>
+{% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+<div class="page-heading">
+    <div><h1>{{ title }}</h1><p>Manage your {{ title|lower }} records.</p></div>
+    <a class="button button-primary" href="{% url 'record_add' model_key %}">+ Add New</a>
+</div>
+<section class="panel">
+<div class="table-wrap">
+<table>
+    <thead><tr><th>Record</th><th>Details</th><th>Actions</th></tr></thead>
+    <tbody>
+    {% for object in objects %}
+    <tr>
+        <td>{{ object }}</td>
+        <td>
+            {% if model_key == 'products' %}
+                SKU: {{ object.sku }} | Stock: {{ object.stock_quantity }} | Price: ₹{{ object.selling_price }}
+            {% elif model_key == 'customers' %}
+                {{ object.phone }} {{ object.email }}
+            {% elif model_key == 'suppliers' %}
+                {{ object.phone }} {{ object.email }}
+            {% else %}
+                {{ object.description|default:"—" }}
+            {% endif %}
+        </td>
+        <td class="actions">
+            <a href="{% url 'record_edit' model_key object.pk %}">Edit</a>
+            <a class="danger-link" href="{% url 'record_delete' model_key object.pk %}">Delete</a>
+        </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="3">No records found. Add your first record.</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+</div>
+</section>
+{% endblock %}
