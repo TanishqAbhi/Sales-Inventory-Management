@@ -5,8 +5,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sales & Inventory Management</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <meta name="theme-color" content="#0b1120">
+    <title>{% block title %}StockFlow | Sales & Inventory Management{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=2">
 </head>
 
 <body>
@@ -25,20 +26,28 @@
                 </div>
             </div>
 
-            <div class="sidebar-menu">
+            <nav class="sidebar-menu">
                 <p class="menu-heading">MAIN MENU</p>
 
-                <a href="{% url 'dashboard' %}" class="nav-link">
+                <a href="{% url 'dashboard' %}"
+                   class="nav-link {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}">
                     <span class="nav-icon">▦</span>
                     <span>Dashboard</span>
                 </a>
 
-                <a href="{% url 'products' %}" class="nav-link">
+                <a href="{% url 'products' %}"
+                   class="nav-link {% if request.resolver_match.url_name == 'products' or request.resolver_match.url_name == 'add_product' %}active{% endif %}">
                     <span class="nav-icon">▤</span>
                     <span>Products</span>
                 </a>
-                <a href="{% url 'sales' %}" class="nav-link">Sales</a>
-            </div>
+
+                <a href="{% url 'sales' %}"
+                   class="nav-link {% if request.resolver_match.url_name == 'sales' or request.resolver_match.url_name == 'create_sale' or request.resolver_match.url_name == 'invoice_detail' %}active{% endif %}">
+                    <span class="nav-icon">▣</span>
+                    <span>Sales</span>
+                </a>
+
+            </nav>
 
             <div class="sidebar-footer">
 
@@ -95,8 +104,8 @@
             </main>
 
             <footer class="page-footer">
-                <span>Sales & Inventory Management System</span>
-                <span>© 2026 All Rights Reserved</span>
+                <span>StockFlow | Sales & Inventory Management</span>
+                <span>&copy; 2026 All Rights Reserved</span>
             </footer>
 
         </div>
